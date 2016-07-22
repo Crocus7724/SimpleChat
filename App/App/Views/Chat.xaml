@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:viewModels="clr-namespace:App.ViewModels;assembly=App"
+	Padding="0,20,0,0"
+	x:Class="App.Chat">
+	<ContentPage.BindingContext>
+		<viewModels:ChatViewModel />
+	</ContentPage.BindingContext>
+	<ContentPage.Content>
+		<StackLayout Orientation="Vertical">
+			<Label Text="Hello SignalR World!!" />
+			<StackLayout Orientation="Horizontal">
+				<Entry Placeholder="Name"
+				       Text="{Binding Name}" />
+				<Button Text="ログイン"
+				        Command="{Binding SubmitLoginCommand}" />
+				<Button Text="ログアウト"
+				        Command="{Binding SubmitLogoutCommand}" />
+			</StackLayout>
+			<Button Text="送信"
+			        Command="{Binding SubmitMessageCommand}">
+			</Button>
+
+
+			<Editor Text="{Binding Message}" />
+
+			<ListView ItemsSource="{Binding MessageList}">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<StackLayout
+								Orientation="Horizontal">
+								<Label Text="{Binding}" />
+							</StackLayout>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

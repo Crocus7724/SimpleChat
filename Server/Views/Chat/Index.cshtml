@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>SampleHub</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.0.3.js"></script>
+    <script src="/signalr/js"></script>
+    <script type="text/javascript">
+		var sample = $.connection.chat;
+		$.connection.hub.start();
+		$(document)
+			.ready(function() {
+				$("#submitName")
+					.click(function() {
+						sample.server.login($("#name").val());
+					});
+
+				$("#submitButton")
+					.click(function() {
+						sample.server.send($("#name").val(),$("#textbox").val());
+					});
+
+				$("#submitLogout")
+					.click(function() {
+						sample.server.logout($("#name").val());
+					});
+			});
+
+
+		sample.client.recieve = function(value) {
+			$("#list").append("<li>" + value + "</li>");
+		}
+
+    </script>
+</head>
+<body>
+<div>
+    Hello SinalR World!!
+    <form>
+        <input id="name" type="text" value="Gest">
+        <input id="submitName" type="button" value="ログイン"/>
+        <input id="textbox" type="text"/>
+	    <input id="submitButton" type="button" value="送信"/>
+	    <br/>
+		<input id="submitLogout" type="button" value="ログアウト"/>
+    </form>
+    <hr/>
+    <p>チャット欄</p>
+    <ul id="list">
+
+    </ul>
+</div>
+</body>
+</html>
